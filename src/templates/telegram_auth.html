@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid d-flex justify-content-center mt-5">
+    <div class="d-grid mx-auto" style="max-width: 300px;">
+        <a href="/admin/" id="loginScriptButton" class="btn btn-primary btn-lg">Войти</a>
+    </div>
+</div>
+
+<div class="container-fluid mt-3 px-3">
+    <div class="d-grid mx-auto" style="max-width: 400px;">
+        <a href="/auth" class="btn btn-outline-primary btn-lg">Вход по логину и паролю</a>
+    </div>
+</div>
+
+{% include 'login_script.html' %}
+{% endblock %}

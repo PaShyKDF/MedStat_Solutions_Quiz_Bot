@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-column align-items-center mt-5">
+    <!-- Вывод Flash-сообщений -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <div class="alert alert-danger text-center w-100 w-md-50">
+                {% for category, message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Форма авторизации -->
+    <form method="POST" class="w-100 w-md-50" novalidate>
+        <!-- CSRF токен -->
+        {{ form.csrf_token }}
+
+        <!-- Поле ввода имени пользователя -->
+        <div class="mb-3 mx-auto" style="max-width: 400px;">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control") }}
+            {% if form.username.errors %}
+                <div class="text-danger mt-1">
+                    {{ form.username.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Поле ввода пароля -->
+        <div class="mb-3 mx-auto" style="max-width: 400px;">
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control") }}
+            {% if form.password.errors %}
+                <div class="text-danger mt-1">
+                    {{ form.password.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Кнопка отправки -->
+        <div class="d-grid mx-auto mb-3" style="max-width: 400px;">
+            {{ form.submit(class="btn btn-primary btn-lg") }}
+        </div>
+    </form>
+
+    <!-- Ссылка на телеграм авторизацию -->
+    <div class="d-grid mx-auto" style="max-width: 400px;">
+        <a href="/telegram_auth" class="btn btn-outline-primary btn-lg">Телеграм авторизация</a>
+    </div>
+</div>
+{% endblock %}
